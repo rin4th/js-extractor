@@ -32,6 +32,28 @@ docker run --rm -p 8080:80 js-recon-lab
 
 Open `http://localhost:8080`.
 
+Atau jalankan aplikasi melalui Docker Compose:
+
+```powershell
+docker compose up --build -d
+```
+
+Compose tidak membuat service Cloudflared baru. Service `web` dipasang ke external network `koramil_koramil_internal`, sehingga container `koramil-cloudflared-1` yang sudah terhubung ke network tersebut dapat mengakses aplikasi.
+
+Jika koneksi network pada container Cloudflared perlu dipulihkan, jalankan:
+
+```powershell
+docker network connect koramil_koramil_internal koramil-cloudflared-1
+```
+
+Di Cloudflare Dashboard, tambahkan Public Hostname pada tunnel tersebut dan atur origin service ke:
+
+```text
+http://js-recon-web:80
+```
+
+Alias `js-recon-web` hanya tersedia pada network internal Docker. Proyek ini tidak membuat container Cloudflared baru dan tidak memerlukan token tunnel. Akses lokal tetap tersedia di `127.0.0.1:8080` secara default dan dapat diubah melalui `APP_BIND_ADDRESS` serta `APP_PORT`.
+
 The image uses `oven/bun:1-alpine` to perform the locked dependency install and Vite build, then copies only the static `dist` output into `nginx:alpine`.
 
 ## Analysis coverage

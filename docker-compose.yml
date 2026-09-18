@@ -1,0 +1,20 @@
+name: js-recon-lab
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: js-recon-lab:local
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8181}:8181"
+    networks:
+      koramil_internal:
+        aliases:
+          - js-recon-web
+    restart: unless-stopped
+
+networks:
+  koramil_internal:
+    external: true
+    name: koramil_koramil_internal
