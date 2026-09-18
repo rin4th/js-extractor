@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    @apply min-h-full bg-ink-950;
+  }
+
+  body {
+    @apply min-h-screen bg-ink-950 font-sans text-slate-200 antialiased;
+    margin: 0;
+    min-width: 320px;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-signal ring-offset-2 ring-offset-ink-950;
+  }
+
+  ::selection {
+    @apply bg-emerald-400/30 text-emerald-50;
+  }
+
+  * {
+    scrollbar-color: #334155 #070b14;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #070b14;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #334155;
+    border: 2px solid #070b14;
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-slate-800/90 bg-ink-850/90 shadow-signal backdrop-blur;
+  }
+
+  .terminal-grid {
+    @apply bg-cyber-grid;
+    background-size: 32px 32px;
+  }
+
+  .cyber-grid {
+    @apply bg-cyber-grid;
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+  }
+
+  .empty-state {
+    @apply grid min-h-64 place-items-center rounded-xl border border-dashed border-white/10 bg-slate-950/30 px-6 text-center text-sm text-slate-500;
+  }
+
+  .source-action {
+    @apply rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[11px] text-slate-300 transition hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-200;
+  }
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.hljs {
+  background: transparent !important;
+  color: #cbd5e1;
+}
